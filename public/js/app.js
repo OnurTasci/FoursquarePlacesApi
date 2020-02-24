@@ -12,9 +12,6 @@ $( document ).ready(function() {
 
             var place = autocomplete.getPlace();
 
-            var today = new Date();
-            var now = today.getFullYear()+''+String(today.getMonth() + 1).padStart(2, '0')+''+String(today.getDate()).padStart(2, '0');
-
             fetch(getList,{
                 method: 'post',
                 headers:{
@@ -49,10 +46,6 @@ $( document ).ready(function() {
         var modal = $(this);
         var button = $(event.relatedTarget);
         var placeId= button.data("id");
-        var today = new Date();
-        var now = today.getFullYear()+''+String(today.getMonth() + 1).padStart(2, '0')+''+String(today.getDate()).padStart(2, '0');
-
-
 
         fetch(getDetail,{
             method: 'post',
