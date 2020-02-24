@@ -19,8 +19,8 @@
 <script src="{{ asset('js/bootstrap.min.js') }}" ></script>
 <script type='text/javascript' src='https://maps.google.com/maps/api/js?key={{ config('services.google.maps_api') }}&libraries=places'></script>
 <script>
-    var client_id = "{{ config('services.foursquare.client_id') }}";
-    var secret_id = "{{  config('services.foursquare.secret_id') }}";
+    var getDetail = "{{  route('getDetail') }}";
+    var getList = "{{  route('getList') }}";
 </script>
 <script src="{{ asset('js/app.js') }}" ></script>
 </body>

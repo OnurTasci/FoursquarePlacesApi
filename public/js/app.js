@@ -15,8 +15,14 @@ $( document ).ready(function() {
             var today = new Date();
             var now = today.getFullYear()+''+String(today.getMonth() + 1).padStart(2, '0')+''+String(today.getDate()).padStart(2, '0');
 
-            fetch('https://api.foursquare.com/v2/venues/explore?client_id='+client_id+'&client_secret='+secret_id+'&v='+now+'&limit=50&ll='+place.geometry.location.lat()+','+place.geometry.location.lng()+'&intent=match')
-                .then(function(response) {
+            fetch(getList,{
+                method: 'post',
+                headers:{
+                    "Content-Type": "application/json; charset=utf-8",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ll: place.geometry.location.lat()+','+place.geometry.location.lng()})}
+                ).then(function(response) {
                     response.json().then(function (places) {
                         $('#result').html('');
                         $.each(places.response.groups['0'].items, function(index, value) {
@@ -48,8 +54,14 @@ $( document ).ready(function() {
 
 
 
-        fetch('https://api.foursquare.com/v2/venues/'+placeId+'?client_id='+client_id+'&client_secret='+secret_id+'&v='+now+'')
-            .then(function(response) {
+        fetch(getDetail,{
+            method: 'post',
+            headers:{
+                "Content-Type": "application/json; charset=utf-8",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({placeId: placeId})}
+        ).then(function(response) {
                 response.json().then(function (places) {
 
                     modal.find('.modal-title').text(places.response.venue.name);
